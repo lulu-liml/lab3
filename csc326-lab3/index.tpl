@@ -17,16 +17,16 @@
 </style>
 <body>
 % if user_email:
-	<form action="/logout" method="post">
+	<!--<form action="/logout" method="post">
         <input value="Sign out" type="submit" style="float:right;margin-left:0.5em"/>
-    </form>
+    </form>-->
 	<span style="float:right;">Welcome, {{user_email}}</span>
 	<br>
 
 % else:
-	<form action="/login_step1" method="post">
+	<!--<form action="/login_step1" method="post">
         <input value="Sign in" type="submit" style="float:right;margin-left:0.5em"/>
-    </form>
+    </form>-->
 	<span style="float:right;">Welcome, anonymous</span>
 	<br>
 	
@@ -75,13 +75,10 @@
       urls = resolved_inverted_index[word]
 	  ranked_url = {}
 	  for url in urls:
-                 print 'url:'+url
 	  	 url_id = lexicon[url]
-		 print 'urlid :'+str(url_id)
                  strid = str(url_id)
                  if page_rank.get(strid)!=None:
 		      url_score = page_rank[strid]
-                      print url_score
 		      ranked_url[url_score] = url
                  end
 	  end
