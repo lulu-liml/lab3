@@ -1,0 +1,100 @@
+1. Maximum number of connections that can be handled by the server before any connection drops.
+
+#run the following command to send 1000 request
+>>ubuntu@ip-172-31-43-73:~$ ab -n 1000 -c 50 http://localhost:80/?keywords=acorn
+
+#test result for 1000 requests
+This is ApacheBench, Version 2.3 <$Revision: 1528965 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        WSGIServer/0.1
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /?keywords=acorn
+Document Length:        945 bytes
+
+Concurrency Level:      50
+Time taken for tests:   0.613 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      1099000 bytes
+HTML transferred:       945000 bytes
+Requests per second:    1630.12 [#/sec] (mean)
+Time per request:       30.673 [ms] (mean)
+Time per request:       0.613 [ms] (mean, across all concurrent requests)
+Transfer rate:          1749.51 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     2    4  20.3      3     411
+Waiting:        1    4  20.3      3     411
+Total:          2    4  20.3      3     411
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      3
+  75%      3
+  80%      3
+  90%      3
+  95%      3
+  98%      3
+  99%      4
+ 100%    411 (longest request)
+
+
+#We also try to run command that sends 1500 or 2000 requests
+#However, not all requests completed
+
+ANSWER: The maximum number of connections is 1000
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+2.Maximum number of requests per second (RPS) that can be sustained by the server when operating with maximum number of connections.
+
+ANSWER: After testing with 1000 connections several time, 
+        the maximum number of Requests per second(RPS)is 1630.12 (mean).(As the output shown above)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>        
+
+3.Average and 99 percentile of response time or latency per request 
+
+ANSWER:As the output shown inside the question 1,
+       average latency per request is around 4ms.
+       The 99 percentile of response time is 4ms.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+4.Utilization of CPU, memory, disk IO, and network when max performance is sustained
+# use dstat tool to monitor the status of the server
+>>ubuntu@ip-172-31-43-73:~/csc326-lab3$ dstat -cdngy --vmstat
+# test result
+  Average usage of CPU is 17.5% (user)
+  Average memory usage is 108.5M (used)
+  Average disk IO is 0B
+  Average network is 120K for send and 32K for received.
+  Screenshot of test result is shown as Result.jpg in the folder.
+  
+
+
+
+
+
+
+
+
